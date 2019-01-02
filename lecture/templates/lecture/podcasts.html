@@ -1,0 +1,66 @@
+{% extends 'lecture/base.html' %}
+{% block title %}All Podcasts{% endblock %}
+{% block songs_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a href="{% url 'lecture:podcasts' 'all' %}">View All</a></li>
+                <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a href="{% url 'lecture:podcasts' 'favorites' %}">Favorites</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Podcast Title</th>
+                                <th>Instructor</th>
+                                <th>Podcast File</th>
+                                <th>CoursePack</th>
+                                <th>Favorite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for podcast in podcast_list %}
+                                <tr>
+                                    <td>{{ podcast.material_title }}</td>
+                                    <td>{{ podcast.course.artist }}</td>
+                                    <td>
+                                        <a target="_blank" href="{{ podcast.material_file.url }}">
+                                            <button type="button" class="btn btn-success btn-xs">
+                                                <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                            </button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'lecture:detail' podcast.course.id %}">
+                                            <img src="{{ podcast.course.thumbnail.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                        </a>
+                                        <a href="{% url 'lecture:detail' podcast.course.id %}">{{ podcast.course.course_title }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'lecture:favorite' podcast.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if podcast.is_favorite %}active{% endif %}"></span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

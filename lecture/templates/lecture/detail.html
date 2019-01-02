@@ -1,0 +1,93 @@
+{% extends 'lecture/base.html' %}
+{% block title %}CoursePack Detail{% endblock %}
+
+
+{% block body %}
+
+	<div class="container-fluid songs-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'lecture:detail' course.id %}">
+                        {% if course.thumbnail %}
+                            <img src="{{ course.thumbnail.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ course.course_title }} <small>{{ course.course_code }}</small></h1>
+                    <h2>{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'lecture:detail' course.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url 'lecture:create_podcast' course.id %}">Add New Material</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Materials</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Material File</th>
+                            <th>Favorite</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for podcast in course.podcast_set.all %}
+                            <tr>
+                                <td>{{ podcast.material_title }}</td>
+                                <td>
+                                    <a target="_blank" href="{{ podcast.material_file.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Download
+                                        </button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'lecture:favorite' podcast.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if podcast.is_favorite %}active{% endif %}"></span></a>
+                                </td>
+                                <td>
+                                    <form action="{% url 'lecture:delete_podcast' course.id podcast.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="podcast_id" value="{{ podcast.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}	

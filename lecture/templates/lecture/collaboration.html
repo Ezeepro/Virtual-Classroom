@@ -1,0 +1,75 @@
+{% extends 'lecture/base.html' %}
+{% block title %}Collaborate{% endblock %}
+{% block collaborate_active %}active{% endblock %}
+
+
+{% block sidebar %}
+			
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                   
+                   
+                     <li>
+                        <a href="{% url 'lecture:desktop' %}"><i class="fa fa-fw  fa-desktop"></i> Share Desktop</a>
+                    </li>
+                     <li>
+                        <a href="{% url 'lecture:collaboration' %}"><i class="fa fa-fw  fa-comments"></i> Start Collaboration</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-mortar-board"></i> Classroom <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            
+                            <li>
+                                <a href="{% url 'lecture:video' %}"><i class="fa fa-fw fa-file-video-o"></i> Video</a>
+                            </li>
+                           
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-microphone"></i> Podcast </a>  
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'lecture:evaluation' %}"><i class="fa fa-fw  fa-comments"></i> Start Test</a>
+                    </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+{% endblock %}
+
+{% block page-wrap %}
+    
+        <div class="page-content" style="margin-top: 100px;">
+            <div class="message">
+              <img src="" class="avatar-slack">
+              <div class="message-body">
+                <h3>Uche <span>10:30 AM</span></h3>
+                <p>Hey guys don't forget to commit and push today's work. Congratz for today 👏👏👏 Awesome sprint. </p>
+              </div>
+            </div>
+            <div class="message">
+              <img src="url ('lecture/images/avatar5.png')" class="avatar-slack">
+              <div class="message-body">
+                <h3>Uche <span>11:30 AM</span></h3>
+                <p>Reminder <strong>@channel</strong> we have a meeting in 10 min 🕑. Try to prepare some questions you want to ask and also some ideas on how we can improve things. Thanks guys 🙏.</p>
+            </div>
+            </div>
+            <div class="message">
+              <img src="url ('lecture/images/avatar5.png')" class="avatar-slack">
+              <div class="message-body">
+                <h3>Mary <span>11:31 AM</span></h3>
+                <p>Reminder <strong>@channel</strong> Having issues with updating my local machine with latest commit. Any help? .</p>
+            </div>
+            </div>
+            <div class="message" style="margin-top: 300px; margin-right: 20px; height: 40px; ">
+                <input type="text" name="" size="130" style="margin-right: 20px; position: sticky;" >
+                <button type="submit">
+                    <a><span class="glyphicon glyphicon-direction"></span> Send </a>
+                </button>
+            </div> 
+        </div>   
+        
+
+
+{% endblock %}                    

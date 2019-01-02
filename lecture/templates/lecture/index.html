@@ -1,0 +1,104 @@
+<!-- loads the path to the static files -->
+{% extends 'lecture/base.html' %}
+{% block assets_active %}active{% endblock %}
+
+{% block body %}
+		
+
+
+<div class="albums-container container-fluid">
+
+    <!-- Coursepack -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ user.username }}'s CoursePacks</h3>
+        </div>
+        {% if courses %}
+            {% for course in courses %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="{% url 'lecture:detail' course.id %}">
+                            <img src="{{ course.thumbnail.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ course.course_title }}</h2>
+                            <h4>{{ course.instructor }}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'lecture:detail' course.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete Coursepack -->
+                            <form action="{% url 'lecture:delete_course' course.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="course_id" value="{{ course.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite Course -->
+                            <a href="{% url 'lecture:favorite_course' course.id %}" class="btn btn-default btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-star {% if course.is_favorite %}active{% endif %}"></span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+       
+    </div>
+
+    <!-- If user searches and there are Materials -->
+    {% if podcasts %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Materials</h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Material Title</th>
+                                    <th>Instructor</th>
+                                    <th>Material File</th>
+                                    <th>CoursePack</th>
+                                    <th>Favorite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for podcast in podcasts %}
+                                    <tr>
+                                        <td>{{ podcast.material_title }}</td>
+                                        <td>{{ podcast.course.instructor }}</td>
+                                        <td>
+                                            <a target="_blank" href="{{ podcast.material_file.url }}">
+                                                <button type="button" class="btn btn-success btn-xs">
+                                                    <span class="glyphicon glyphicon-play"></span>&nbsp; Download
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'lecture:detail' podcast.course.id %}">
+                                                <img src="{{ podcast.course.thumbnail.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                            </a>
+                                            <a href="{% url 'lecture:detail' podcast.course.id %}">{{ podcast.course.course_title }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'lecture:favorite' podcast.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if podcast.is_favorite %}active{% endif %}"></span></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

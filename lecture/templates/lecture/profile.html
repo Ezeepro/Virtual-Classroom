@@ -1,0 +1,133 @@
+{% extends 'lecture/base.html' %}
+{% block title %}Profile{% endblock %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'lecture/css/sb-admin.css' %}" />
+
+
+{% block sidebar %}
+			
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="#">
+                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-th-list "></i> Attendance List</a>
+                    </li>
+                     <li>
+                        <a href="#"><i class="fa fa-fw  fa-desktop"></i> Share Desktop</a>
+                    </li>
+                     <li>
+                        <a href="#"><i class="fa fa-fw  fa-comments"></i> Start Collaboration</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-mortar-board"></i> Classroom <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-mortar-board"></i> Whiteboard </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-file-video-o"></i> Video</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-file-powerpoint-o"></i> Presentation</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-microphone"></i> Podcast </a>  
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+{% endblock %}
+
+{% block page-wrap %}
+	<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Profile <small>Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Profile
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                  <div class="dashboard">
+                    <div class="dashboard-card main">
+                      <div class="dashboard-card-content">
+                        <img src="images/user.png" alt="" width="150" class="img-circle">
+                        <h2>Ezekiel Olugbami</h2>
+                        <p>Instructor at Federal University Lokoja (B.Sc., M.Sc.)</p>
+                        <a href="#" class="btn btn-primary btn-lg">Get in touch</a>
+                      </div>
+                    </div>
+                    <div class="dashboard-card stat">
+                      <div class="dashboard-card-content">
+                        <h3>3,536</h3>
+                        <p>contributions</p>
+                      </div>
+                    </div>
+                    <div class="dashboard-card stat">
+                      <div class="dashboard-card-content">
+                        <h3>758</h3>
+                        <p>followers</p>
+                      </div>
+                    </div>
+                    <div class="dashboard-card stat">
+                      <div class="dashboard-card-content">
+                        <h3>119</h3>
+                        <p>repositories</p>
+                      </div>
+                    </div>
+                    <div class="dashboard-card description">
+                      <div class="dashboard-card-content">
+                        <h3>More about Ezekiel</h3>
+                        <p class="text-justify">
+                          I am an expert in Web Mining, E-Learning & Software Engineering. I'm full-stack developer with 7 years of working experience.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+              
+                </div>
+                </div>
+
+
+
+
+
+
+
+
+                <!-- /.row -->
+            </div>
+        </div>
+
+        
+
+        
+
+
+	</div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}
+
+
+

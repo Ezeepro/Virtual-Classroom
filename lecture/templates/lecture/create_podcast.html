@@ -1,0 +1,61 @@
+{% extends 'lecture/base.html' %}
+{% block title %}Add a New Podcast{% endblock %}
+{% block assets_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                        <a href="{% url 'lecture:detail' course.id %}">
+                            {% if course.thumbnail %}
+                                <img src="{{ course.thumbnail.url }}" class="img-responsive">
+                            {% else %}
+                                <h3>No image to display</h3>
+                            {% endif %}
+                        </a>
+                    <h1>{{ course.course_title }} <small>{{ course.course_code }}</small></h1>
+                    <h2>{{ course.instructor }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation"><a href="{% url 'lecture:detail' course.id %}">View All</a></li>
+                <li role="presentation" class="active"><a href="{% url 'lecture:create_podcast' course.id %}">Add New Material</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add a New Material</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="course" value="{{ course }}">
+                        {% include 'lecture/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
